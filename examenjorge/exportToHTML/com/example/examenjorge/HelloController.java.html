@@ -1,0 +1,143 @@
+<html>
+<head>
+<title>HelloController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+HelloController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">examenjorge</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">FileChooser</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">File</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Files</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">StandardCopyOption</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">HelloController </span><span class="s2">{</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ChoiceBox</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">tipotalla</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField textopeso</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button botoncalcular</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField textoedad</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">RadioButton botonhombre</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">RadioButton botonmujer</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextArea observacionestexto</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ChoiceBox</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">tipoactividad</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button botondescargar</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Label Pesoresultado</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">public void </span><span class="s1">initialize</span><span class="s2">() {</span>
+        <span class="s1">tipotalla</span><span class="s2">.</span><span class="s1">getItems</span><span class="s2">().</span><span class="s1">addAll</span><span class="s2">(</span><span class="s3">&quot;Talla l&quot;</span><span class="s2">, </span><span class="s3">&quot;Talla xl&quot;</span><span class="s2">, </span><span class="s3">&quot;Talla xxl&quot;</span><span class="s2">);</span>
+        <span class="s1">tipotalla</span><span class="s2">.</span><span class="s1">setValue</span><span class="s2">(</span><span class="s3">&quot;Talla 1&quot;</span><span class="s2">);</span>
+
+        <span class="s1">tipoactividad</span><span class="s2">.</span><span class="s1">getItems</span><span class="s2">().</span><span class="s1">addAll</span><span class="s2">(</span><span class="s3">&quot;Actividad baja&quot;</span><span class="s2">, </span><span class="s3">&quot;Actividad media&quot;</span><span class="s2">, </span><span class="s3">&quot;Actividad alta&quot;</span><span class="s2">);</span>
+        <span class="s1">tipoactividad</span><span class="s2">.</span><span class="s1">setValue</span><span class="s2">(</span><span class="s3">&quot;Actividad baja&quot;</span><span class="s2">);</span>
+
+        <span class="s1">ToggleGroup toggleGroup </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ToggleGroup</span><span class="s2">();</span>
+        <span class="s1">botonhombre</span><span class="s2">.</span><span class="s1">setToggleGroup</span><span class="s2">(</span><span class="s1">toggleGroup</span><span class="s2">);</span>
+        <span class="s1">botonmujer</span><span class="s2">.</span><span class="s1">setToggleGroup</span><span class="s2">(</span><span class="s1">toggleGroup</span><span class="s2">);</span>
+
+        <span class="s1">botoncalcular</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; calcularMetabolismoBasal</span><span class="s2">());</span>
+
+        <span class="s1">botondescargar</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; descargarInformacion</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">calcularMetabolismoBasal</span><span class="s2">() {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s0">double </span><span class="s1">peso </span><span class="s2">= </span><span class="s1">Double</span><span class="s2">.</span><span class="s1">parseDouble</span><span class="s2">(</span><span class="s1">textopeso</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">());</span>
+            <span class="s0">int </span><span class="s1">edad </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">textoedad</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">());</span>
+
+            <span class="s0">double </span><span class="s1">factorActividad </span><span class="s2">= </span><span class="s1">obtenerFactorActividad</span><span class="s2">();</span>
+
+            <span class="s0">double </span><span class="s1">metabolismoBasal</span><span class="s2">;</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">botonhombre</span><span class="s2">.</span><span class="s1">isSelected</span><span class="s2">()) {</span>
+                <span class="s1">metabolismoBasal </span><span class="s2">= </span><span class="s4">10 </span><span class="s2">* </span><span class="s1">peso </span><span class="s2">+ </span><span class="s4">6.25 </span><span class="s2">* </span><span class="s1">edad </span><span class="s2">- </span><span class="s4">5 </span><span class="s2">* </span><span class="s1">edad </span><span class="s2">+ </span><span class="s4">5</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">botonmujer</span><span class="s2">.</span><span class="s1">isSelected</span><span class="s2">()) {</span>
+                <span class="s1">metabolismoBasal </span><span class="s2">= </span><span class="s4">10 </span><span class="s2">* </span><span class="s1">peso </span><span class="s2">+ </span><span class="s4">6.25 </span><span class="s2">* </span><span class="s1">edad </span><span class="s2">- </span><span class="s4">5 </span><span class="s2">* </span><span class="s1">edad </span><span class="s2">- </span><span class="s4">161</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">throw new </span><span class="s1">IllegalStateException</span><span class="s2">(</span><span class="s3">&quot;Debe seleccionar un sexo.&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s1">metabolismoBasal </span><span class="s2">*= </span><span class="s1">factorActividad</span><span class="s2">;</span>
+
+            <span class="s1">Pesoresultado</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Tu metabolismo basal es: &quot; </span><span class="s2">+ </span><span class="s1">metabolismoBasal</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">NumberFormatException e</span><span class="s2">) {</span>
+            <span class="s1">Pesoresultado</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Por favor ingresa valores válidos en los campos de peso y edad.&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IllegalStateException e</span><span class="s2">) {</span>
+            <span class="s1">Pesoresultado</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">private double </span><span class="s1">obtenerFactorActividad</span><span class="s2">() {</span>
+        <span class="s1">String actividadSeleccionada </span><span class="s2">= </span><span class="s1">tipoactividad</span><span class="s2">.</span><span class="s1">getValue</span><span class="s2">();</span>
+        <span class="s0">double </span><span class="s1">factorActividad</span><span class="s2">;</span>
+        <span class="s0">switch </span><span class="s2">(</span><span class="s1">actividadSeleccionada</span><span class="s2">) {</span>
+            <span class="s0">case </span><span class="s3">&quot;Actividad baja&quot;</span><span class="s2">:</span>
+                <span class="s1">factorActividad </span><span class="s2">= </span><span class="s4">1.2</span><span class="s2">;</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">case </span><span class="s3">&quot;Actividad media&quot;</span><span class="s2">:</span>
+                <span class="s1">factorActividad </span><span class="s2">= </span><span class="s4">1.375</span><span class="s2">;</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">case </span><span class="s3">&quot;Actividad alta&quot;</span><span class="s2">:</span>
+                <span class="s1">factorActividad </span><span class="s2">= </span><span class="s4">1.55</span><span class="s2">;</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">default</span><span class="s2">:</span>
+                <span class="s1">factorActividad </span><span class="s2">= </span><span class="s4">1.2</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">factorActividad</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">descargarInformacion</span><span class="s2">() {</span>
+        <span class="s1">String resourcePath </span><span class="s2">= </span><span class="s1">getClass</span><span class="s2">().</span><span class="s1">getClassLoader</span><span class="s2">().</span><span class="s1">getResource</span><span class="s2">(</span><span class="s3">&quot;reporte1.jasper&quot;</span><span class="s2">).</span><span class="s1">getFile</span><span class="s2">();</span>
+
+        <span class="s1">FileChooser fileChooser </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileChooser</span><span class="s2">();</span>
+        <span class="s1">fileChooser</span><span class="s2">.</span><span class="s1">setInitialFileName</span><span class="s2">(</span><span class="s3">&quot;reporte1.jasper&quot;</span><span class="s2">);</span>
+        <span class="s1">File selectedFile </span><span class="s2">= </span><span class="s1">fileChooser</span><span class="s2">.</span><span class="s1">showSaveDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">selectedFile </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">Files</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s0">new </span><span class="s1">File</span><span class="s2">(</span><span class="s1">resourcePath</span><span class="s2">).</span><span class="s1">toPath</span><span class="s2">(), </span><span class="s1">selectedFile</span><span class="s2">.</span><span class="s1">toPath</span><span class="s2">(), </span><span class="s1">StandardCopyOption</span><span class="s2">.</span><span class="s1">REPLACE_EXISTING</span><span class="s2">);</span>
+                <span class="s1">mostrarAlerta</span><span class="s2">(</span><span class="s3">&quot;Descarga exitosa&quot;</span><span class="s2">, </span><span class="s3">&quot;El archivo se ha descargado correctamente.&quot;</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+                <span class="s1">mostrarAlerta</span><span class="s2">(</span><span class="s3">&quot;Error al descargar&quot;</span><span class="s2">, </span><span class="s3">&quot;No se pudo descargar el archivo: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">mostrarAlerta</span><span class="s2">(</span><span class="s1">String titulo</span><span class="s2">, </span><span class="s1">String mensaje</span><span class="s2">) {</span>
+        <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">INFORMATION</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s1">titulo</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">setContentText</span><span class="s2">(</span><span class="s1">mensaje</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
